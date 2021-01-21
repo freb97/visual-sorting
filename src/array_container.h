@@ -1,4 +1,0 @@
-#ifndef ARRAY_CONTAINER_H
-#define ARRAY_CONTAINER_H
-
-#endif // ARRAY_CONTAINER_H

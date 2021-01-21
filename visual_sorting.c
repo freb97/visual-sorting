@@ -1,48 +1,59 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-#include "src/modules.h"
-#include "src/dynamic_array.h"
+#include "src/container.h"
+#include "src/sort.h"
+
+Container* init() {
+    system("clear");
+
+    int quantity;
+
+    printf("Enter number of elements in array:\n");
+    scanf("%d", &quantity);
+    
+    Container *container = container_init(quantity);
+    container_fill(container);
+
+    return container;
+}
+
+int chooseAlgorithm() {
+    system("clear");
+
+    int algorithm;
+
+    printf("Enter number of sorting algorithm (Bubblesort: 1, Quicksort: 2)\n");
+    scanf("%d", &algorithm);
+
+    return algorithm;
+}
 
 int main() {
-    // Construct array and allocate memory
-    DynamicModulesArray array = construct_dynamic_modules_array();
+    Container* container = init();
+    int algorithm = chooseAlgorithm();
 
-    // Read modules as long as valid input is given
-    while(1) {
-        Module *module = module_read();
+    system("clear");
 
-        if (module == NULL) {
-            break;
-        }
+    printf("Generated array:\n");
+    container_print(container);
 
-        // Push module into array
-        push_back_module(&array, module);
+    printf("\nPress Enter to sort");
+    fflush(stdin);
+    getchar();
+
+    if (algorithm == 1) {
+        bubblesort(container);
+    } else if (algorithm == 2) {
+        quicksort(container, 0, container->size - 1);
     }
 
-    // Find index with abbreviation "MAT2" and print
-    char searchWord[] = "MAT2";
-    printf("\n\nSearching for %s...\n", searchWord);
-    unsigned int index = find_module_index(&array, searchWord);
-    printf("Index: %u\n", index);
-    module_print(array.modules[index]);
-    
-    // Save module "MAT1" for later
-    Module mat1 = array.modules[12];
+    system("clear");
 
-    // Erase module "MAT1" (index 12)
-    erase_module(&array, 12);
+    printf("Sorted array:\n");
+    container_print(container);
 
-    // Add module "MAT1" to index 3
-    insert_module(&array, 3, &mat1);
-
-    // Print all modules in array
-    printf("\n\n");
-    for (int i = 0; i < array.used; i++) {
-        module_print(array.modules[i]);
-    }
-
-    // Destruct array and free allocated memory
-    destruct_dynamic_modules_array(&array);
+    container_destruct(container);
 
     return 1;
 }
