@@ -1,6 +1,6 @@
-# Dynamic Array and Linked List
+# Visual Sorting
 
-Dynamically growing array and linked list of a custom struct "Module"
+Different sorting algorithms on an array of integers displayed visually on the console
 
 ## Build
 
@@ -12,9 +12,8 @@ Dynamically growing array and linked list of a custom struct "Module"
 
 ## Run
 
-### dynamic array
+### visual sorting
 
-Run the executable, use the given modules.csv data to initialize the 
-module structs passed to the array.
+Run the executable enter the size of the array and choose an algorithm
 
-`build/dynamicarray < input/modules.csv`
+`build/visualsort`
